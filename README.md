@@ -1,5 +1,27 @@
 # Pig-
 
+QUESTION 1
+CountryData = LOAD 'unsd-citypopulation-year-fm.csv' USING PigStorage (',')AS (Country:chararray, year:int ,Area:chararray, Sex: chararray,   City: chararray, CityType:chararray, RecordType: chararray, Reliability: chararray, SourceYear:int, Value:int, ValueFootnotes:int);
+
+
+ForCountries   =   FOREACH    CountryData   GENERATE   Country;
+
+
+ForCount   =   DISTINCT ForCountries ;
+
+
+
+GroupingCountries = GROUP  ForCount ALL;
+ 
+
+
+CountingCountries  = FOREACH  GroupingCountries GENERATE   COUNT (ForCount);
+
+
+dump CountingCountries
+
+
+
 
 
 -- QUESTION 2: List the countries together with the number of cities in each country.
@@ -24,6 +46,9 @@ SORTING = ORDER ForCountriesCity BY year DESC;
 -- displaying of final answer
 
 dump SORTING;
+
+
+
 
 
 
